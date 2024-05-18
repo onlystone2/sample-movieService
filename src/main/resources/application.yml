@@ -83,4 +83,4 @@ resilience4j:
 
 logging:
   level:
-    root: DEBUG
+    root: INFO

@@ -3,7 +3,9 @@ package com.kaankaplan.movieService.business.concretes;
 import com.kaankaplan.movieService.business.abstracts.CityService;
 import com.kaankaplan.movieService.business.abstracts.MovieService;
 import com.kaankaplan.movieService.dao.CityDao;
+import com.kaankaplan.movieService.dao.mapper.CityMapper;
 import com.kaankaplan.movieService.entity.City;
+import com.kaankaplan.movieService.entity.CityMovie;
 import com.kaankaplan.movieService.entity.Movie;
 import com.kaankaplan.movieService.entity.dto.CityRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +24,17 @@ public class CityServiceImpl implements CityService {
     private final CityDao cityDao;
     private final MovieService movieService;
     private final WebClient.Builder webClientBuilder;
+    private final CityMapper cityMapper;
 
 
     @Override
     public List<City> getCitiesByMovieId(int movieId) {
         return cityDao.getCitiesByMovieMovieId(movieId);
+    }
+
+    @Override
+    public List<CityMovie> getCitiesByMyBatis(int movieId) {
+        return cityMapper.getCitiesByMovieMovieId(movieId);
     }
 
     @Cacheable(value = "cities")

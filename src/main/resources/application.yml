@@ -21,6 +21,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: 'true'
+    defer-datasource-initialization: 'true'
+  sql:
+    init:
+      mode: always
   # Apache Kafka Producer Properties
   kafka:
     producer:
@@ -41,6 +45,14 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: test
+    listener:
+      direct:
+        acknowledge-mode: manual
 # Eureka Properties
 eureka:
   client:
@@ -80,6 +92,32 @@ resilience4j:
       inventory:
         max-attempts: 3
         wait-duration: 5s
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+amqp:
+  bindings:
+    -
+      exchange: comment.events
+      routingKey: comment.created
+      queue: comment.created.user-service
+    -
+      exchange: comment.events
+      routingKey: comment.failed
+      queue: comment.failed.user-service
+
+  queues:
+    user_created: user.created.comment-service
+    comment_created: comment.created.user-service
+    comment_failed: comment.failed.user-service
+
+  routingKey:
+    comment_created: comment.created
+    comment_failed: comment.failed
+
+  exchange:
+    comment_events: comment.events
 
 logging:
   level:

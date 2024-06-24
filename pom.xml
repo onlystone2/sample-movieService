@@ -49,6 +49,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
@@ -100,56 +104,53 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.3.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.3</version>
                 <configuration>
-                    <mainClass>com.kaankaplan.movieService.MovieServiceApplication</mainClass>
-                    <layout>JAR</layout>
+                    <from>
+                        <image>openjdk:17-oracle</image>
+<!--                        <image>openjdk:8</image>-->
+                    </from>
+                    <to>
+                        <!--                        <image>docker.io/onlystone2/movie-service-1.0</image>-->
+                        <image>onlystone2/movie-service-1.0</image>
+                        <tags>
+                            <tag>latest</tag>
+                        </tags>
+                        <!--                <auth>-->
+                        <!--                    <username>myUserName</username>-->
+                        <!--                    <password>MyPassword</password>-->
+                        <!--                </auth>-->
+                    </to>
+                    <!--                    <containerizingMode>packaged</containerizingMode>-->
+                    <containerizingMode>exploded</containerizingMode>
+                    <container>
+                        <!--                        <jvmFlags>-->
+                        <!--                            <jvmFlag>-Xms512m</jvmFlag>-->
+                        <!--                            <jvmFlag>-Xdebug</jvmFlag>-->
+                        <!--                        </jvmFlags>-->
+                        <!--                        <ports>-->
+                        <!--                            <port>8080</port>-->
+                        <!--                        </ports>-->
+                        <format>Docker</format>
+                    </container>
                 </configuration>
                 <executions>
                     <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.33.0</version>
-                <configuration>
-                    <images>
-                        <image>
-                            <name>onlystone2/movie-service-1.0</name>
-                            <build>
-                                <dockerFileDir>${basedir}</dockerFileDir>
-                                <tags>
-                                    <tag>latest</tag>
-                                </tags>
-                            </build>
-                        </image>
-                    </images>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>docker-build</id>
-                        <phase>install</phase>
+                        <id>package</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>build</goal>
-                            <goal>push</goal>
                         </goals>
                     </execution>
                 </executions>

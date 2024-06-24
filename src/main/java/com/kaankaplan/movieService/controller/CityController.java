@@ -2,6 +2,7 @@ package com.kaankaplan.movieService.controller;
 
 import com.kaankaplan.movieService.business.abstracts.CityService;
 import com.kaankaplan.movieService.entity.City;
+import com.kaankaplan.movieService.entity.CityMovie;
 import com.kaankaplan.movieService.entity.dto.CityRequestDto;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -20,6 +21,11 @@ public class CityController {
     @GetMapping("getCitiesByMovieId/{movieId}")
     public List<City> getCitiesByMovieId(@PathVariable int movieId) {
         return cityService.getCitiesByMovieId(movieId);
+    }
+
+    @GetMapping("getCitiesByMyBatis/{movieId}")
+    public List<CityMovie> getCitiesByMyBatis(@PathVariable int movieId) {
+        return cityService.getCitiesByMyBatis(movieId);
     }
 
     @GetMapping("getall")

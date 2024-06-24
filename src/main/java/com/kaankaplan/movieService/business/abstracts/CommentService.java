@@ -1,5 +1,6 @@
 package com.kaankaplan.movieService.business.abstracts;
 
+import com.kaankaplan.movieService.common.dtos.UserCommentCreatedEventDto;
 import com.kaankaplan.movieService.entity.Comment;
 import com.kaankaplan.movieService.entity.dto.CommentRequestDto;
 import com.kaankaplan.movieService.entity.dto.DeleteCommentRequestDto;
@@ -15,4 +16,6 @@ public interface CommentService {
     Comment addComment(CommentRequestDto commentRequestDto);
 
     int getNumberOfCommentsByMovieId(int movieId);
+
+    void addUserComment(UserCommentCreatedEventDto userCommentCreatedEventDto);
 }

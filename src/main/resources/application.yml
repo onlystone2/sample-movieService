@@ -10,7 +10,7 @@ spring:
   # PostgreSql Properties
   datasource:
     username: 'postgres'
-    url: jdbc:postgresql://localhost:5432/cine_vision
+    url: jdbc:postgresql://localhost:30110/cine_vision
     password: '12345'
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -28,26 +28,26 @@ spring:
   # Apache Kafka Producer Properties
   kafka:
     producer:
-      bootstrap-servers: localhost:29092
+      bootstrap-servers: localhost:30092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring:
           json:
             type:
-              mapping: event:com.kaankaplan.movieService.entity.dto.EmailMessageKafkaDto
+              mapping: event:com.kubeworks.movieService.entity.dto.EmailMessageKafkaDto
     topic:
       name: email_topics
   # Zipkin Properties
   zipkin:
-    base-url: http://localhost:9411
+    base-url: http://localhost:32000
   # Sleuth Properties
   sleuth:
     sampler:
       probability: 1.0
   rabbitmq:
     host: localhost
-    port: 5672
+    port: 30210
     username: user
     password: test
     listener:
@@ -121,4 +121,4 @@ amqp:
 
 logging:
   level:
-    root: INFO
+    root: DEBUG

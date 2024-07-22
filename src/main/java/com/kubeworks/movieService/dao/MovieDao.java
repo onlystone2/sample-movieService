@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface MovieDao extends JpaRepository<Movie, Integer> {
 
-    @Query("Select new com.kaankaplan.movieService.entity.dto.MovieResponseDto(m.movieId, m.movieName, m.description, m.duration," +
+    @Query("Select new com.kubeworks.movieService.entity.dto.MovieResponseDto(m.movieId, m.movieName, m.description, m.duration," +
             "m.releaseDate, m.isDisplay, c.categoryId, c.categoryName, i.imageUrl, m.movieTrailerUrl, d.directorName" +
             ") " +
             "From Movie m inner join m.category c on m.category.categoryId=c.categoryId " +
@@ -20,7 +20,7 @@ public interface MovieDao extends JpaRepository<Movie, Integer> {
             "inner join m.image i on m.image.imageId=i.imageId where m.isDisplay=true and m.releaseDate <= current_date")
     List<MovieResponseDto> getAllDisplayingMoviesInVision();
 
-    @Query("select new com.kaankaplan.movieService.entity.dto.MovieResponseDto(" +
+    @Query("select new com.kubeworks.movieService.entity.dto.MovieResponseDto(" +
             "m.movieId, m.movieName, m.description, m.duration, m.releaseDate, m.isDisplay," +
             "c.categoryId, c.categoryName, i.imageUrl, m.movieTrailerUrl, d.directorName) from Movie m" +
             " inner join m.image i on m.image.imageId=i.imageId" +
@@ -29,7 +29,7 @@ public interface MovieDao extends JpaRepository<Movie, Integer> {
             " where m.isDisplay=false and m.releaseDate > current_date")
     List<MovieResponseDto> getAllComingSoonMovies();
 
-    @Query("select new com.kaankaplan.movieService.entity.dto.MovieResponseDto(" +
+    @Query("select new com.kubeworks.movieService.entity.dto.MovieResponseDto(" +
             "m.movieId, m.movieName, m.description, m.duration, m.releaseDate, m.isDisplay," +
             "c.categoryId, c.categoryName, i.imageUrl, m.movieTrailerUrl, d.directorName) from Movie m" +
             " inner join m.image i on m.image.imageId=i.imageId" +

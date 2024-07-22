@@ -76,6 +76,6 @@ public class MovieServiceImpl implements MovieService {
             return movieDao.save(movie);
         }
 
-        throw new RuntimeException("Yetki hatası");
+        throw new RuntimeException("authorization error");
     }
 }
